@@ -33,5 +33,13 @@ let modal
     ]
 }
 
+/*octopus*/
+var octopus={
+    init:function(){
+        //first cat will see on load
+        model.currentCat = model.cats[0];
+    }
+}
+
 
 
