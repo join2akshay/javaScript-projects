@@ -29,6 +29,7 @@ let modal
             name:'Tenny',
             imgSrc:"https://farm5.staticflickr.com/4177/34738948615_9ba2eba156_b.jpg"
         }
+        
     ]
 }
 
