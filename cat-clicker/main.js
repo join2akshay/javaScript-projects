@@ -38,8 +38,19 @@ var octopus={
     init:function(){
         //first cat will see on load
         model.currentCat = model.cats[0];
+        // view initilize
+        CatListView.init();
+        CatView.init();
     }
 }
+
+/* View */
+
+var view={
+    
+};
+
+
 
 
 
