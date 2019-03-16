@@ -1,6 +1,6 @@
 /*modal*/
 
-let modal
+let model
 {
     currentCat=null;
     cats:[
@@ -41,13 +41,54 @@ var octopus={
         // view initilize
         CatListView.init();
         CatView.init();
+    },
+    getCats:function(){
+        return model.cats;
+    },
+    setCurrentCat:function(cat){
+        model.currentCat = cat;
     }
 }
 
-/* View */
+/* Cat Image View */
 
-var view={
-    
+var CatView={
+    //initilize
+   
+};
+
+/*Cat List View*/
+var CatListView={
+//initilize
+init:function(){
+    this.catListEle=document.getElementById('cat-list');
+    //render all DOM with right value
+    this.render();
+},
+render:function(){
+    var cat,elem,i;
+    //get cat render from octopus
+    var cats=octopus.getCats();
+    //empty cat list 
+    this.catListEle.innerHTML='';
+    //Show cat name in List using loop
+    for(i=0;i<cats.length;i++)
+    {
+        cat=cats[i];
+        elem=document.createElement('li');
+        elem.textContent=cat.name;
+        // on click, setCurrentCat and render the catView
+        elem.addEventListener('click',(function(catCopy){
+            return function(){
+                octopus.setCurrentCat(catCopy);
+                catView.render();
+            };
+        })(cat));
+
+        // finally, add the element to the list
+        this.catListElem.appendChild(elem);
+    }
+}
 };
 
 
