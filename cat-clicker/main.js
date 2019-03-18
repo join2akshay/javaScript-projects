@@ -1,9 +1,8 @@
-/*modal*/
+/*model*/
 
-let model
-{
-    currentCat=null;
-    cats:[
+let model={
+    currentCat:null,
+    cats: [
         {
             clickCount:0,
             name:'Jenny',
@@ -47,13 +46,40 @@ var octopus={
     },
     setCurrentCat:function(cat){
         model.currentCat = cat;
+    },
+    incrementCat:function(){
+        model.currentCat.clickCount++;
+        CatView.render();
+    },
+    getCurrentCat: function() {
+        return model.currentCat;
     }
+
 }
 
 /* Cat Image View */
 
 var CatView={
     //initilize
+    init:function(){
+        //Store DOM element in variable.
+        this.catElem=document.getElementById('cat');
+        this.catImg=document.getElementById('cat-img');
+        this.catName=document.getElementById('cat-name');
+        this.catCount=document.getElementById('cat-count');
+        //on click increment cat count
+        this.catCount.addEventListener('click',function(){
+            octopus.incrementCat();
+        });
+        this.render();
+    },
+    render: function() {
+        // update the DOM elements with values from the current cat
+        var currentCat = octopus.getCurrentCat();
+        this.catCount.textContent = currentCat.clickCount;
+        this.catName.textContent = currentCat.name;
+        this.catImg.src = currentCat.imgSrc;
+    }
    
 };
 
@@ -61,7 +87,7 @@ var CatView={
 var CatListView={
 //initilize
 init:function(){
-    this.catListEle=document.getElementById('cat-list');
+    this.catListElem=document.getElementById('cat-list');
     //render all DOM with right value
     this.render();
 },
@@ -70,7 +96,7 @@ render:function(){
     //get cat render from octopus
     var cats=octopus.getCats();
     //empty cat list 
-    this.catListEle.innerHTML='';
+    this.catListElem.innerHTML='';
     //Show cat name in List using loop
     for(i=0;i<cats.length;i++)
     {
@@ -81,7 +107,7 @@ render:function(){
         elem.addEventListener('click',(function(catCopy){
             return function(){
                 octopus.setCurrentCat(catCopy);
-                catView.render();
+                CatView.render();
             };
         })(cat));
 
@@ -95,3 +121,5 @@ render:function(){
 
 
 
+// make it go!
+octopus.init();
